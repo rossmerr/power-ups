@@ -9,6 +9,11 @@ document.getElementById("save").addEventListener("click", function () {
   t.get("board", "shared", "description").then(function (data) {
     console.log(data);
   });
+  t.card("desc")
+    .get("desc")
+    .then(function (desc) {
+      console.log(desc);
+    });
   t.alert({
     message: "Saved Description!",
     duration: 15,
@@ -23,6 +28,9 @@ t.render(function () {
     .then(function (desc) {
       t.set("board", "shared", "description", desc);
       console.log(desc);
+      t.get("board", "shared", "description").then(function (desc) {
+        console.log(desc);
+      });
       t.get("board", "shared", "description").then(function (desc) {
         console.log(desc);
       });
