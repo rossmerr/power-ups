@@ -8,22 +8,47 @@ var descriptionSelector = document.getElementById("description");
 document.getElementById("save").addEventListener("click", function () {
   t.card("desc")
     .get("desc")
-    .then(function (desc) {
-      console.log(desc);
+    .then((desc) => {
       let lines = desc.split("\n");
-      console.log(lines);
       let list = lines.filter((line) => line.startsWith("- "));
       list = list.map((line) => line.substring(2));
       console.log(list);
-      t.alert({
-        message: "Saved Description!",
-        duration: 15,
-        display: "info",
-      });
-      t.closePopup();
+      fetch("https://keep.googleapis.com/v1/notes", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: "test-trello",
+          body: {
+            list: {
+              listItems: [
+                {
+                  text: {
+                    text: "test",
+                  },
+                  checked: false,
+                },
+              ],
+            },
+          },
+        }),
+      })
+        .then((response) => {
+          console.log(response.json());
+        })
+        .then(() => {
+          t.alert({
+            message: "Saved Description!",
+            duration: 15,
+            display: "info",
+          });
+          t.closePopup();
+        });
     });
 });
 
-t.render(function () {
+t.render(() => {
   t.sizeTo("#description");
 });
