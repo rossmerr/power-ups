@@ -19,7 +19,7 @@ document.getElementById("save").addEventListener("click", function () {
   //   duration: 15,
   //   display: "info",
   // });
-  t.closePopup();
+  //t.closePopup();
 });
 
 t.render(function () {
