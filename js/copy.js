@@ -6,7 +6,7 @@ var descriptionSelector = document.getElementById("description");
 
 // "description-content";
 document.getElementById("save").addEventListener("click", function () {
-  t.get("card", "shared", "description").then(function (desc) {
+  t.get("board", "shared", "description").then(function (desc) {
     console.log(desc);
   });
   t.alert({
@@ -21,9 +21,9 @@ t.render(function () {
   t.card("desc")
     .get("desc")
     .then(function (desc) {
-      t.set("card", "shared", "description", desc);
+      t.set("board", "shared", "description", desc);
       console.log(desc);
-      t.get("card", "shared", "description").then(function (desc) {
+      t.get("board", "shared", "description").then(function (desc) {
         console.log(desc);
       });
     })
