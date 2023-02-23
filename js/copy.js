@@ -6,6 +6,11 @@ var descriptionSelector = document.getElementById("description");
 
 // "description-content";
 document.getElementById("save").addEventListener("click", function () {
+  t.card("desc")
+    .get("desc")
+    .then(function (desc) {
+      console.log(desc);
+    });
   t.alert({
     message: "Saved Description!",
     duration: 15,
