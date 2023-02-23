@@ -23,6 +23,9 @@ t.render(function () {
     .then(function (desc) {
       t.set("card", "shared", "description", desc);
       console.log(desc);
+      t.get("card", "shared", "description").then(function (desc) {
+        console.log(desc);
+      });
     })
     .then(function () {
       return t.sizeTo("#description");
