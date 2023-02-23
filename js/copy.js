@@ -14,11 +14,11 @@ document.getElementById("save").addEventListener("click", function () {
     .then(function (desc) {
       console.log(desc);
     });
-  t.alert({
-    message: "Saved Description!",
-    duration: 15,
-    display: "info",
-  });
+  // t.alert({
+  //   message: "Saved Description!",
+  //   duration: 15,
+  //   display: "info",
+  // });
   t.closePopup();
 });
 
