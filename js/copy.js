@@ -6,13 +6,12 @@ var descriptionSelector = document.getElementById("description");
 
 // "description-content";
 document.getElementById("save").addEventListener("click", function () {
-  // t.get("board", "shared", "description").then(function (data) {
-  //   console.log(data);
-  // });
   t.card("desc")
     .get("desc")
     .then(function (desc) {
-      console.log(desc);
+      let lines = desc.split("\n");
+      let list = lines.filter((line) => line.startsWith(" - "));
+      console.log(list);
       t.alert({
         message: "Saved Description!",
         duration: 15,
@@ -24,17 +23,4 @@ document.getElementById("save").addEventListener("click", function () {
 
 t.render(function () {
   t.sizeTo("#description");
-
-  // t.card("desc")
-  //   .get("desc")
-  //   .then(function (desc) {
-  //     t.set("board", "shared", "description", desc);
-  //   })
-  //   .then(function () {
-  //     return t.sizeTo("#description");
-  //   });
-
-  // return t.get("card", "shared", "description").then(function () {
-  //   t.sizeTo("#description").done();
-  // });
 });
