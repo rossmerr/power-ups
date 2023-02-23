@@ -6,8 +6,8 @@ var descriptionSelector = document.getElementById("description");
 
 // "description-content";
 document.getElementById("save").addEventListener("click", function () {
-  t.get("board", "shared", "description").then(function (desc) {
-    console.log(desc);
+  t.get("board", "shared", "description").then(function (data) {
+    console.log(data);
   });
   t.alert({
     message: "Saved Description!",
