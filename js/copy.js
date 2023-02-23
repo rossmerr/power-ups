@@ -13,6 +13,7 @@ document.getElementById("save").addEventListener("click", function () {
       let lines = desc.split("\n");
       console.log(lines);
       let list = lines.filter((line) => line.startsWith("- "));
+      list = list.map((line) => line.substring(2));
       console.log(list);
       t.alert({
         message: "Saved Description!",
