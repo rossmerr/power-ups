@@ -14,12 +14,12 @@ document.getElementById("save").addEventListener("click", function () {
     .then(function (desc) {
       console.log(desc);
     });
-  // t.alert({
-  //   message: "Saved Description!",
-  //   duration: 15,
-  //   display: "info",
-  // });
-  // t.closePopup();
+  t.alert({
+    message: "Saved Description!",
+    duration: 15,
+    display: "info",
+  });
+  t.closePopup();
 });
 
 t.render(function () {
@@ -27,13 +27,6 @@ t.render(function () {
     .get("desc")
     .then(function (desc) {
       t.set("board", "shared", "description", desc);
-      console.log(desc);
-      t.get("board", "shared", "description").then(function (desc) {
-        console.log(desc);
-      });
-      t.get("board", "shared", "description").then(function (desc) {
-        console.log(desc);
-      });
     })
     .then(function () {
       return t.sizeTo("#description");
