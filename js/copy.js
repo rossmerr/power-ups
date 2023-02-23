@@ -9,8 +9,10 @@ document.getElementById("save").addEventListener("click", function () {
   t.card("desc")
     .get("desc")
     .then(function (desc) {
+      console.log(desc);
       let lines = desc.split("\n");
-      let list = lines.filter((line) => line.startsWith(" - "));
+      console.log(lines);
+      let list = lines.filter((line) => line.startsWith("- "));
       console.log(list);
       t.alert({
         message: "Saved Description!",
