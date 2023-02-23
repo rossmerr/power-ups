@@ -15,10 +15,10 @@ document.getElementById("save").addEventListener("click", function () {
 });
 
 t.render(function () {
-  t.card("attachments")
-    .get("attachments")
-    .filter(function (attachment) {
-      console.log(attachment);
+  t.card("description")
+    .get("description")
+    .then(function (description) {
+      console.log(description);
     })
     .then(function () {
       return t.sizeTo("#description");
