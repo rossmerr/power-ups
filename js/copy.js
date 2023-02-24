@@ -37,15 +37,18 @@ document.getElementById("save").addEventListener("click", async () => {
           Accept: "application/json",
         },
       }
-    ).timeout(300);
+    );
   });
 
   console.log(promises);
 
-  await Promise.any(promises).catch(Promise.TimeoutError, function (e) {
-    console.log("could not fetch within 300ms");
+  const d = Promise.delay(500).then(() => {
+    console.log("delay");
   });
+  promises.push(d);
+  console.log("await");
 
+  await Promise.any(promises);
   console.log("alert");
 
   t.alert({
