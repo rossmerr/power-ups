@@ -41,16 +41,19 @@ document.getElementById("save").addEventListener("click", async () => {
   //   );
   // });
 
-  const d = Promise.delay(500).then(() => {
-    console.log("delay");
+  const promise1 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 500, "one");
   });
-  promises.push(d);
+
+  promises.push(promise1);
 
   console.log(promises);
 
   console.log("await");
 
-  await Promise.any(promises);
+  await Promise.race(promises).then(() => {
+    console.log("race");
+  });
   console.log("alert");
 
   t.alert({
