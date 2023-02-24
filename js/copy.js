@@ -54,7 +54,9 @@ document.getElementById("save").addEventListener("click", async () => {
     new Promise((resolve, reject) => {
       console.log("timeout");
       resolve();
-      setTimeout(resolve, 500);
+      setTimeout(() => {
+        console.log("timeout");
+      }, 500);
     }),
   ]).then(() => {
     console.log("race");
