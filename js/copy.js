@@ -29,14 +29,14 @@ document.getElementById("save").addEventListener("click", function () {
                 },
               }
             ).catch((err) => console.error(err));
-
-            t.alert({
-              message: "Saved Description!",
-              duration: 15,
-              display: "info",
-            });
-            t.closePopup();
           });
+
+          t.alert({
+            message: "Saved Description!",
+            duration: 15,
+            display: "info",
+          });
+          t.closePopup();
           // fetch(
           //   `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}?=name=${}`,
           //   {
