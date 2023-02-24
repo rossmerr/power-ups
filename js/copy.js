@@ -30,20 +30,22 @@ document.getElementById("save").addEventListener("click", async () => {
 
   console.log(token);
 
-  await Promise.any(
-    list.map((line) =>
-      fetch(
-        `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
-        {
-          method: "POST",
-          keepalive: true,
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      )
+  let promises = list.map((line) =>
+    fetch(
+      `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
+      {
+        method: "POST",
+        keepalive: true,
+        headers: {
+          Accept: "application/json",
+        },
+      }
     )
   );
+
+  promises.push(new Promise((resolve) => setTimeout(resolve, 5000, "timeout")));
+
+  await Promise.any(promises);
 
   console.log("alert");
 
