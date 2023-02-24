@@ -55,7 +55,7 @@ document.getElementById("save").addEventListener("click", async () => {
     display: "info",
   });
   // queueMicrotask(async () => {
-  //   t.closePopup();
+  t.closePopup();
   // });
 });
 
