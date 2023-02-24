@@ -48,7 +48,9 @@ document.getElementById("save").addEventListener("click", async () => {
     duration: 5,
     display: "info",
   });
-  // t.closePopup();
+  queueMicrotask(async () => {
+    t.closePopup();
+  });
 });
 
 t.render(() => {
