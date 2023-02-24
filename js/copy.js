@@ -21,11 +21,10 @@ document.getElementById("save").addEventListener("click", function () {
         .getToken()
         .then(async (token) => {
           console.log(list);
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 5000);
           for (let line of list) {
             console.log(line);
-            // await axios.post(
-            //   `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`
-            // );
             await fetch(
               `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
               {
@@ -35,6 +34,7 @@ document.getElementById("save").addEventListener("click", function () {
                 headers: {
                   Accept: "application/json",
                 },
+                signal: controller.signal,
               }
             ).then(() => {
               console.log("then");
