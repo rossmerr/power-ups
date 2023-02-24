@@ -23,20 +23,22 @@ document.getElementById("save").addEventListener("click", function () {
           console.log(list);
           for (let line of list) {
             console.log(line);
-            await axios.post(
-              `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`
-            );
-            // await fetch(
-            //   `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
-            //   {
-            //     method: "POST",
-            //     headers: {
-            //       Accept: "application/json",
-            //     },
-            //   }
-            // ).then(() => {
-            //   console.log("then");
-            // });
+            // await axios.post(
+            //   `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`
+            // );
+            await fetch(
+              `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
+              {
+                method: "POST",
+                mode: "cors",
+                keepalive: true,
+                headers: {
+                  Accept: "application/json",
+                },
+              }
+            ).then(() => {
+              console.log("then");
+            });
             console.log("done");
           }
           console.log("done all");
