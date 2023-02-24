@@ -36,7 +36,6 @@ document.getElementById("save").addEventListener("click", function () {
             await fetch(
               `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
               {
-                credentials: "include",
                 method: "POST",
                 keepalive: true,
                 headers: {
