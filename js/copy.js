@@ -31,7 +31,9 @@ document.getElementById("save").addEventListener("click", function () {
                   Accept: "application/json",
                 },
               }
-            );
+            ).then(() => {
+              console.log("then");
+            });
             console.log("done");
           }
           console.log("done all");
