@@ -77,8 +77,9 @@ document.getElementById("save").addEventListener("click", async () => {
     message: "Saved Bullet List!",
     duration: 5,
     display: "info",
+  }).then(() => {
+    t.closePopup();
   });
-  t.closePopup();
 });
 
 t.render(() => {
