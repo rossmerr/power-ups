@@ -19,36 +19,33 @@ document.getElementById("save").addEventListener("click", function () {
       return t
         .getRestApi()
         .getToken()
-        .then((token) => {
+        .then(async (token) => {
           console.log(list);
-          // const controller = new AbortController();
-          // const timeoutId = setTimeout(() => controller.abort(), 5000);
           for (let line of list) {
             console.log(line);
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-              console.log("change");
-            };
-            xhr.open(
-              "POST",
-              `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`
-            );
-            xhr.send();
+            // var xhr = new XMLHttpRequest();
+            // xhr.onreadystatechange = function () {
+            //   console.log("change");
+            // };
+            // xhr.open(
+            //   "POST",
+            //   `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`
+            // );
+            // xhr.send();
 
-            // await fetch(
-            //   `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
-            //   {
-            //     method: "POST",
-            //     mode: "cors",
-            //     keepalive: true,
-            //     headers: {
-            //       Accept: "application/json",
-            //     },
-            //     signal: controller.signal,
-            //   }
-            // ).then(() => {
-            //   console.log("then");
-            // });
+            await fetch(
+              `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
+              {
+                credentials: "include",
+                method: "POST",
+                keepalive: true,
+                headers: {
+                  Accept: "application/json",
+                },
+              }
+            ).then(() => {
+              console.log("then");
+            });
             console.log("done");
           }
           console.log("done all");
