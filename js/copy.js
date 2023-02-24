@@ -50,9 +50,10 @@ document.getElementById("save").addEventListener("click", async () => {
 
   console.log("await");
 
-  setTimeout(() => {
-    console.log("setTimeout");
-  }, 500);
+  queueMicrotask(() => {
+    console.log("task");
+    console.log(list);
+  });
 
   await Promise.race([
     new Promise((resolve, reject) => {
