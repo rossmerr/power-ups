@@ -53,6 +53,7 @@ document.getElementById("save").addEventListener("click", async () => {
   await Promise.race([
     new Promise((resolve, reject) => {
       console.log("timeout");
+      resolve();
       setTimeout(resolve, 500);
     }),
   ]).then(() => {
