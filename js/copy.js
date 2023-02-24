@@ -10,14 +10,13 @@ var t = TrelloPowerUp.iframe({
 
 // "description-content";
 document.getElementById("save").addEventListener("click", async () => {
-  let list = t
+  let list = await t
     .card("desc")
     .get("desc")
     .then((desc) => {
       let lines = desc.split("\n");
       list = lines.filter((line) => line.startsWith("- "));
-      list = list.map((line) => line.substring(2));
-      return list;
+      return list.map((line) => line.substring(2));
     });
 
   console.log(list);
@@ -31,21 +30,21 @@ document.getElementById("save").addEventListener("click", async () => {
 
   console.log(token);
 
-  for await (let line of list) {
-    await fetch(
-      `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
-      {
-        method: "POST",
-        keepalive: true,
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    ).then(() => {
-      console.log("then");
-    });
-    console.log("done all");
-  }
+  await Promise.any(
+    list.map((line) =>
+      fetch(
+        `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
+        {
+          method: "POST",
+          keepalive: true,
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      )
+    )
+  );
+
   console.log("alert");
 
   t.alert({
