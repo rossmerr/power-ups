@@ -16,7 +16,8 @@ document.getElementById("save").addEventListener("click", function () {
       let lines = desc.split("\n");
       let list = lines.filter((line) => line.startsWith("- "));
       list = list.map((line) => line.substring(2));
-      t.getRestApi()
+      return t
+        .getRestApi()
         .getToken()
         .then(async (token) => {
           for (let line of list) {
@@ -33,7 +34,6 @@ document.getElementById("save").addEventListener("click", function () {
           console.log("done");
         })
         .then(() => {
-          console.log("tset", t);
           t.alert({
             message: "Saved Description!",
             duration: 15,
