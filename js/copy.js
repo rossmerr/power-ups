@@ -73,13 +73,14 @@ document.getElementById("save").addEventListener("click", async () => {
       });
   });
 
+  console.log("alert");
+
   t.alert({
     message: "Saved Bullet List!",
     duration: 5,
     display: "info",
-  }).then(() => {
-    t.closePopup();
   });
+  // t.closePopup();
 });
 
 t.render(() => {
