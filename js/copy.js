@@ -10,29 +10,28 @@ var t = TrelloPowerUp.iframe({
 
 // "description-content";
 document.getElementById("save").addEventListener("click", async () => {
-  let list = [];
-  await t
+  let list = t
     .card("desc")
     .get("desc")
     .then((desc) => {
       let lines = desc.split("\n");
       list = lines.filter((line) => line.startsWith("- "));
       list = list.map((line) => line.substring(2));
+      return list;
     });
 
   console.log(list);
 
-  let token = "";
-  await t
+  let token = await t
     .getRestApi()
     .getToken()
     .then(async (t) => {
-      token = t;
+      return t;
     });
 
   console.log(token);
 
-  for (let line of list) {
+  for await (let line of list) {
     await fetch(
       `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
       {
