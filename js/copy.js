@@ -39,7 +39,7 @@ document.getElementById("save").addEventListener("click", async () => {
     )
   );
 
-  promises.push(Promise.resolve());
+  promises.push(new Promise((resolve) => setTimeout(resolve, 5000)));
 
   await Promise.any(promises);
 
