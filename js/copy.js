@@ -26,6 +26,7 @@ document.getElementById("save").addEventListener("click", async () => {
       return t;
     });
 
+  console.log(fetch);
   let promises = list.map((line) => {
     return fetch(
       `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
@@ -36,22 +37,14 @@ document.getElementById("save").addEventListener("click", async () => {
           Accept: "application/json",
         },
       }
-    );
+    ).timeout(300);
   });
-
-  promises.push(
-    new Promise((resolve) => {
-      console.log("start timeout");
-      setTimeout(() => {
-        console.log("timeout");
-        resolve();
-      }, 5000);
-    })
-  );
 
   console.log(promises);
 
-  await Promise.any(promises);
+  await Promise.any(promises).catch(Promise.TimeoutError, function (e) {
+    console.log("could not fetch within 300ms");
+  });
 
   console.log("alert");
 
