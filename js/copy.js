@@ -32,15 +32,15 @@ document.getElementById("save").addEventListener("click", function () {
               );
             })
           );
-        })
-        .finally(() => {
-          t.alert({
-            message: "Saved Description!",
-            duration: 15,
-            display: "info",
-          });
-          t.closePopup();
         });
+    })
+    .then(() => {
+      t.alert({
+        message: "Saved Description!",
+        duration: 15,
+        display: "info",
+      });
+      t.closePopup();
     });
 });
 
