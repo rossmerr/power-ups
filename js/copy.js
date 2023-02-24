@@ -22,7 +22,7 @@ document.getElementById("save").addEventListener("click", function () {
           let request = Promise.all(
             list.map((line) => {
               return fetch(
-                `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${list[i]}`,
+                `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
                 {
                   method: "POST",
                   headers: {
