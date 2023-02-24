@@ -26,31 +26,7 @@ document.getElementById("save").addEventListener("click", async () => {
       return t;
     });
 
-  // let promises = list.map((line) => {
-  //   return fetch(
-  //     `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
-  //     {
-  //       method: "POST",
-  //       keepalive: true,
-  //       headers: {
-  //         Accept: "application/json",
-  //       },
-  //     }
-  //   );
-  // });
-
-  // const promise1 = new Promise((resolve, reject) => {
-  //   setTimeout(resolve, 500, "one");
-  // });
-
-  // promises.push(promise1);
-
-  // console.log(promises);
-
-  console.log("await");
-
   queueMicrotask(async () => {
-    console.log("task");
     let promises = list.map((line) => {
       return fetch(
         `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
@@ -64,23 +40,15 @@ document.getElementById("save").addEventListener("click", async () => {
       );
     });
 
-    await Promise.race(promises)
-      .then(() => {
-        console.log("race");
-      })
-      .catch(() => {
-        console.log("catch");
-      });
+    await Promise.race(promises);
   });
-
-  console.log("alert");
 
   t.alert({
     message: "Saved Bullet List!",
     duration: 5,
     display: "info",
   });
-  // t.closePopup();
+  t.closePopup();
 });
 
 t.render(() => {
