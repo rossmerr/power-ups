@@ -53,9 +53,10 @@ document.getElementById("save").addEventListener("click", async () => {
   await Promise.race([
     new Promise((resolve, reject) => {
       console.log("timeout");
-      resolve();
+
       setTimeout(() => {
         console.log("timeout");
+        resolve();
       }, 500);
     }),
   ]).then(() => {
@@ -68,7 +69,7 @@ document.getElementById("save").addEventListener("click", async () => {
     duration: 5,
     display: "info",
   });
-  t.closePopup();
+  // t.closePopup();
 });
 
 t.render(() => {
