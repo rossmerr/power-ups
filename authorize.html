@@ -4,11 +4,17 @@
 <head>
   <meta charset=utf-8>
   <title>Authorize</title>
+  <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+  <style>
+    select {
+      height: 30px;
+    }
+  </style>
+  <script src="https://p.trellocdn.com/power-up.min.js"></script>
 </head>
 
 <body>
-  <button type=button>Click to authorize</button>
-  <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  <button class="mod-primary" type=button>Click to authorize</button>
   <script>
     var t = window.TrelloPowerUp.iframe({
       appKey: "af49ac90e03fe140ef7903e8a1f70b1b",
@@ -19,7 +25,11 @@
         t.getRestApi()
           .authorize({ scope: 'read,write' })
           .then(function (t) {
-            alert('Success!');
+            t.alert({
+              message: "Success!",
+              duration: 15,
+              display: "info",
+            });
           });
       }, false);
     });
