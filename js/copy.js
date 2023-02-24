@@ -16,29 +16,23 @@ document.getElementById("save").addEventListener("click", function () {
       let lines = desc.split("\n");
       let list = lines.filter((line) => line.startsWith("- "));
       list = list.map((line) => line.substring(2));
-      return t
-        .getRestApi()
+      t.getRestApi()
         .getToken()
-        .then((token) => {
-          return Promise.all(
-            list.map((line) => {
-              return fetch(
-                `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
-                {
-                  method: "POST",
-                  headers: {
-                    Accept: "application/json",
-                  },
-                }
-              );
-            })
-          ).then(() => {
-            console.log("test");
-          });
+        .then(async (token) => {
+          for (let line of list) {
+            await fetch(
+              `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
+              {
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                },
+              }
+            );
+          }
+          console.log("done");
         })
-        .then((test) => {
-          console.log("test", test);
-
+        .then(() => {
           console.log("tset", t);
           t.alert({
             message: "Saved Description!",
