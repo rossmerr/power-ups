@@ -19,7 +19,7 @@ document.getElementById("save").addEventListener("click", function () {
       t.getRestApi()
         .getToken()
         .then(function (token) {
-          list.array.forEach((element) => {
+          list.forEach((element) => {
             fetch(
               `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${element}`,
               {
