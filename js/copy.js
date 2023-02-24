@@ -19,16 +19,12 @@ document.getElementById("save").addEventListener("click", async () => {
       return list.map((line) => line.substring(2));
     });
 
-  console.log(list);
-
   let token = await t
     .getRestApi()
     .getToken()
     .then(async (t) => {
       return t;
     });
-
-  console.log(token);
 
   let promises = list.map((line) =>
     fetch(
@@ -43,7 +39,13 @@ document.getElementById("save").addEventListener("click", async () => {
     )
   );
 
-  promises.push(new Promise((resolve) => setTimeout(resolve, 5000, "timeout")));
+  promises.push(
+    new Promise(() =>
+      setTimeout(() => {
+        /* */
+      }, 5000)
+    )
+  );
 
   await Promise.any(promises);
 
