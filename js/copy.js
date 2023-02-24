@@ -15,7 +15,7 @@ document.getElementById("save").addEventListener("click", async () => {
     .get("desc")
     .then((desc) => {
       let lines = desc.split("\n");
-      list = lines.filter((line) => line.startsWith("- "));
+      let list = lines.filter((line) => line.startsWith("- "));
       return list.map((line) => line.substring(2));
     });
 
