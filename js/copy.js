@@ -26,8 +26,7 @@ document.getElementById("save").addEventListener("click", async () => {
       return t;
     });
 
-  console.log(fetch);
-  let promises = [];
+  // let promises =
   // list.map((line) => {
   //   return fetch(
   //     `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
@@ -41,17 +40,22 @@ document.getElementById("save").addEventListener("click", async () => {
   //   );
   // });
 
-  const promise1 = new Promise((resolve, reject) => {
-    setTimeout(resolve, 500, "one");
-  });
+  // const promise1 = new Promise((resolve, reject) => {
+  //   setTimeout(resolve, 500, "one");
+  // });
 
-  promises.push(promise1);
+  // promises.push(promise1);
 
-  console.log(promises);
+  // console.log(promises);
 
   console.log("await");
 
-  await Promise.race(promises).then(() => {
+  await Promise.race([
+    new Promise((resolve, reject) => {
+      console.log(timeout);
+      setTimeout(resolve, 500, "one");
+    }),
+  ]).then(() => {
     console.log("race");
   });
   console.log("alert");
