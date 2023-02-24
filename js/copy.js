@@ -19,10 +19,8 @@ document.getElementById("save").addEventListener("click", function () {
       t.getRestApi()
         .getToken()
         .then(function (token) {
-          let request = Promise.all(
+          return Promise.all(
             list.map((line) => {
-              console.log(line);
-
               return fetch(
                 `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
                 {
@@ -34,29 +32,14 @@ document.getElementById("save").addEventListener("click", function () {
               );
             })
           );
-
-          return request
-            .then((responses) => {
-              console.log(responses);
-              return responses.forEach((res) => console.log(res.text()));
-            })
-            .then(() => {
-              t.alert({
-                message: "Saved Description!",
-                duration: 15,
-                display: "info",
-              });
-              t.closePopup();
-            });
-
-          //.catch ((err) => console.error(err));
-
-          // t.alert({
-          //   message: "Saved Description!",
-          //   duration: 15,
-          //   display: "info",
-          // });
-          // t.closePopup();
+        })
+        .then(() => {
+          t.alert({
+            message: "Saved Description!",
+            duration: 15,
+            display: "info",
+          });
+          t.closePopup();
         });
     });
 });
