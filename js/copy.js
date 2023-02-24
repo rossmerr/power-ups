@@ -9,55 +9,52 @@ var t = TrelloPowerUp.iframe({
 });
 
 // "description-content";
-document.getElementById("save").addEventListener("click", function () {
-  t.card("desc")
+document.getElementById("save").addEventListener("click", async () => {
+  let list = [];
+  await t
+    .card("desc")
     .get("desc")
     .then((desc) => {
       let lines = desc.split("\n");
-      let list = lines.filter((line) => line.startsWith("- "));
+      list = lines.filter((line) => line.startsWith("- "));
       list = list.map((line) => line.substring(2));
-      return t
-        .getRestApi()
-        .getToken()
-        .then(async (token) => {
-          console.log(list);
-          for (let line of list) {
-            console.log(line);
-            // var xhr = new XMLHttpRequest();
-            // xhr.onreadystatechange = function () {
-            //   console.log("change");
-            // };
-            // xhr.open(
-            //   "POST",
-            //   `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`
-            // );
-            // xhr.send();
-
-            await fetch(
-              `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
-              {
-                method: "POST",
-                keepalive: true,
-                headers: {
-                  Accept: "application/json",
-                },
-              }
-            ).then(() => {
-              console.log("then");
-            });
-            console.log("done");
-          }
-          console.log("done all");
-        })
-        .then(() => {
-          t.alert({
-            message: "Saved Bullet List!",
-            duration: 5,
-            display: "info",
-          });
-          t.closePopup();
-        });
     });
+
+  console.log(list);
+
+  let token = "";
+  await t
+    .getRestApi()
+    .getToken()
+    .then(async (t) => {
+      token = t;
+    });
+
+  console.log(token);
+
+  for (let line of list) {
+    await fetch(
+      `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
+      {
+        method: "POST",
+        keepalive: true,
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    ).then(() => {
+      console.log("then");
+    });
+    console.log("done all");
+  }
+  console.log("alert");
+
+  t.alert({
+    message: "Saved Bullet List!",
+    duration: 5,
+    display: "info",
+  });
+  t.closePopup();
 });
 
 t.render(() => {
