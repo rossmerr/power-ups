@@ -1,5 +1,3 @@
-Copy;
-
 function showIframe(t) {
   return t.popup({
     title: "Authorize to continue",
