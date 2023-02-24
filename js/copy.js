@@ -27,25 +27,27 @@ document.getElementById("save").addEventListener("click", async () => {
     });
 
   console.log(fetch);
-  let promises = list.map((line) => {
-    return fetch(
-      `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
-      {
-        method: "POST",
-        keepalive: true,
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    );
-  });
-
-  console.log(promises);
+  let promises = [];
+  // list.map((line) => {
+  //   return fetch(
+  //     `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
+  //     {
+  //       method: "POST",
+  //       keepalive: true,
+  //       headers: {
+  //         Accept: "application/json",
+  //       },
+  //     }
+  //   );
+  // });
 
   const d = Promise.delay(500).then(() => {
     console.log("delay");
   });
   promises.push(d);
+
+  console.log(promises);
+
   console.log("await");
 
   await Promise.any(promises);
