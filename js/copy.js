@@ -32,15 +32,16 @@ document.getElementById("save").addEventListener("click", function () {
               );
             })
           );
+        })
+        .then(() => {
+          console.log("tset", t);
+          t.alert({
+            message: "Saved Description!",
+            duration: 15,
+            display: "info",
+          });
+          t.closePopup();
         });
-    })
-    .then(() => {
-      t.alert({
-        message: "Saved Description!",
-        duration: 15,
-        display: "info",
-      });
-      t.closePopup();
     });
 });
 
