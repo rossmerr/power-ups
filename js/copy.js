@@ -1,5 +1,7 @@
 /* global TrelloPowerUp */
 
+var Promise = window.TrelloPowerUp.Promise;
+
 const appKey = "af49ac90e03fe140ef7903e8a1f70b1b";
 var t = TrelloPowerUp.iframe({
   appKey: appKey,
@@ -14,29 +16,44 @@ document.getElementById("save").addEventListener("click", function () {
       let lines = desc.split("\n");
       let list = lines.filter((line) => line.startsWith("- "));
       list = list.map((line) => line.substring(2));
-      console.log(list);
-
       t.getRestApi()
         .getToken()
         .then(function (token) {
-          for (let element in list) {
-            fetch(
-              `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${element}`,
-              {
-                method: "POST",
-                headers: {
-                  Accept: "application/json",
-                },
-              }
-            ).catch((err) => console.error(err));
-          }
+          let request = Promise.all(
+            list.map((line) => {
+              return fetch(
+                `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${list[i]}`,
+                {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json",
+                  },
+                }
+              );
+            })
+          );
 
-          t.alert({
-            message: "Saved Description!",
-            duration: 15,
-            display: "info",
-          });
-          t.closePopup();
+          request
+            .then((responses) =>
+              responses.forEach((res) => console.log(res.text()))
+            )
+            .then(() => {
+              t.alert({
+                message: "Saved Description!",
+                duration: 15,
+                display: "info",
+              });
+              t.closePopup();
+            });
+
+          //.catch ((err) => console.error(err));
+
+          // t.alert({
+          //   message: "Saved Description!",
+          //   duration: 15,
+          //   display: "info",
+          // });
+          // t.closePopup();
         });
     });
 });
