@@ -26,8 +26,7 @@ document.getElementById("save").addEventListener("click", async () => {
       return t;
     });
 
-  // let promises =
-  // list.map((line) => {
+  // let promises = list.map((line) => {
   //   return fetch(
   //     `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
   //     {
@@ -50,23 +49,30 @@ document.getElementById("save").addEventListener("click", async () => {
 
   console.log("await");
 
-  queueMicrotask(() => {
+  queueMicrotask(async () => {
     console.log("task");
-    console.log(list);
+    let promises = list.map((line) => {
+      return fetch(
+        `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${line}`,
+        {
+          method: "POST",
+          keepalive: true,
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
+    });
+
+    await Promise.race(promises)
+      .then(() => {
+        console.log("race");
+      })
+      .catch(() => {
+        console.log("catch");
+      });
   });
 
-  await Promise.race([
-    new Promise((resolve, reject) => {
-      console.log("timeout");
-
-      setTimeout(() => {
-        console.log("timeout");
-        resolve();
-      }, 500);
-    }),
-  ]).then(() => {
-    console.log("race");
-  });
   console.log("alert");
 
   t.alert({
