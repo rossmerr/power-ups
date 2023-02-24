@@ -33,7 +33,7 @@ document.getElementById("save").addEventListener("click", function () {
             })
           );
         })
-        .then(() => {
+        .finally(() => {
           t.alert({
             message: "Saved Description!",
             duration: 15,
