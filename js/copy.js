@@ -18,7 +18,7 @@ document.getElementById("save").addEventListener("click", function () {
       list = list.map((line) => line.substring(2));
       t.getRestApi()
         .getToken()
-        .then(function (token) {
+        .then((token) => {
           return Promise.all(
             list.map((line) => {
               return fetch(
@@ -33,7 +33,9 @@ document.getElementById("save").addEventListener("click", function () {
             })
           );
         })
-        .then(() => {
+        .then((test) => {
+          console.log("test", test);
+
           console.log("tset", t);
           t.alert({
             message: "Saved Description!",
