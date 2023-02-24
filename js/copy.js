@@ -19,7 +19,7 @@ document.getElementById("save").addEventListener("click", function () {
       t.getRestApi()
         .getToken()
         .then(function (token) {
-          list.forEach((element) => {
+          for (let element in list) {
             fetch(
               `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}&name=${element}`,
               {
@@ -29,7 +29,7 @@ document.getElementById("save").addEventListener("click", function () {
                 },
               }
             ).catch((err) => console.error(err));
-          });
+          }
 
           t.alert({
             message: "Saved Description!",
@@ -37,26 +37,6 @@ document.getElementById("save").addEventListener("click", function () {
             display: "info",
           });
           t.closePopup();
-          // fetch(
-          //   `https://api.trello.com/1/cards?idList=63f8963af0c4c0cefac67203&key=${appKey}&token=${token}?=name=${}`,
-          //   {
-          //     method: "POST",
-          //     headers: {
-          //       Accept: "application/json",
-          //     },
-          //   }
-          // )
-          // .then((response) => {
-          //   if (response.status === 200) {
-          //     t.alert({
-          //       message: "Saved Description!",
-          //       duration: 15,
-          //       display: "info",
-          //     });
-          //   }
-          // })
-          // .then((text) => t.closePopup())
-          // .catch((err) => console.error(err));
         });
     });
 });
