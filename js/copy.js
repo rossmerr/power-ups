@@ -16,7 +16,8 @@ document.getElementById("save").addEventListener("click", function () {
       let lines = desc.split("\n");
       let list = lines.filter((line) => line.startsWith("- "));
       list = list.map((line) => line.substring(2));
-      t.getRestApi()
+      return t
+        .getRestApi()
         .getToken()
         .then((token) => {
           return Promise.all(
