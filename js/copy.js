@@ -31,7 +31,9 @@ document.getElementById("save").addEventListener("click", function () {
                 }
               );
             })
-          );
+          ).then(() => {
+            console.log("test");
+          });
         })
         .then((test) => {
           console.log("test", test);
